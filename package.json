@@ -1,0 +1,23 @@
+{
+  "name": "crednitt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharad86/CredNITT.git"
+  },
+  "author": "Sharad, Vijitendra and  Harshit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sharad86/CredNITT/issues"
+  },
+  "homepage": "https://github.com/sharad86/CredNITT#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
+}
