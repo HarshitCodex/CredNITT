@@ -1,0 +1,10 @@
+<%-include("partials/header")%>
+<h1>This is the shops page!</h1>
+
+<%shops.forEach(function(shops){%>
+<div>
+	<h4><%= shops.name %></h4>
+</div>
+	
+<%});%>
+<%-include("partials/footer")%>
