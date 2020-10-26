@@ -11,7 +11,7 @@ var User = require("./models/user");
 
 var shopsRoutes = require("./routes/shops");
 var indexRoutes = require("./routes/index");
-var transactionsRoutes = require("./routes/transactions");
+var paymentRoutes = require("./routes/payment");
 mongoose.connect("mongodb://localhost/CredNitt",{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false });
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,26 +39,11 @@ app.use(function(req,res,next){
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
-//individual payment routes-----------------------------------------
-app.get("/payment/:id", (req, res) => {
-	//use this when the backend is ready
-	/* Shop.findById(req.params.id, function (err, foundShop) {
-		if (err) {
-			console.log(err);
-		}
-		else {
-			res.render("payments", { shop: foundShop });
-		}
-	}); */
 
-	//temporary rendering
-	let shop = { name: "2K Market", id: "abc", amount: 100 };
-	res.render("payments", { shop: shop });
-});
 
 app.use("/",indexRoutes);
 app.use("/shops",shopsRoutes);
-app.use(transactionsRoutes);
+app.use(paymentRoutes);
 app.listen(process.env.PORT ||3000,process.env.IP, function() { 
   console.log('Server listening on port 3000'); 
 });
