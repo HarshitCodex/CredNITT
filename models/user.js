@@ -5,7 +5,11 @@ var UserSchema = new mongoose.Schema({
 	password: String,
 	firstName: String,
 	lastName: String,
-	
+	image: String,
+	imageId: String,
+	email: {type:String, unique:true, required:false},
+	Balance: Number,
+	Dues: Number,
 	isAdmin:{type:Boolean, default:false}
 });
 UserSchema.plugin(passportLocalMongoose);
