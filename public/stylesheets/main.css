@@ -41,7 +41,10 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
+
+
   color: white;
+
   background: transparent;
 }
 .navbar-brand {
@@ -51,6 +54,7 @@ body {
   margin: auto 0;
   text-align: center!important;
 }
+
 
 .links{
   color:white; 
