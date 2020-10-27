@@ -7,7 +7,7 @@ var UserSchema = new mongoose.Schema({
 	lastName: String,
 	image: String,
 	imageId: String,
-	email: {type:String, unique:true, required:false},
+	email: { type: String, require: true, index:true, unique:true,sparse:true},
 	Balance: Number,
 	Dues: Number,
 	isAdmin:{type:Boolean, default:false}

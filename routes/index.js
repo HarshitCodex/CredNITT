@@ -24,8 +24,8 @@ var upload = multer({
 var cloudinary = require("cloudinary");
 cloudinary.config({
   cloud_name: 'crednitt', 
-  api_key: process.env.CloudinaryAPIKEY, 
-  api_secret: process.env.Cloudinarysecret
+  api_key:'698692367846536', 
+  api_secret: 'NN7xe67y2pg0HgyhPU3YQIdldog'
 });
 
 
@@ -64,7 +64,7 @@ router.post("/register",upload.single("image"), function(req, res){
 
     User.register(newUser, req.body.password, function(err, user){
       if(err){
-        //console.log(err);
+        console.log(err);
         return res.render("register", {error: err.message});
       }
       passport.authenticate("local")(req, res, function(){

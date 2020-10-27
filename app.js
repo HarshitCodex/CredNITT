@@ -44,6 +44,6 @@ mongoose.set('useUnifiedTopology', true);
 app.use("/",indexRoutes);
 app.use("/shops",shopsRoutes);
 app.use(paymentRoutes);
-app.listen(process.env.PORT ||3000,process.env.IP, function() { 
+app.listen(process.env.PORT ||3000, function() { 
   console.log('Server listening on port 3000'); 
 });
