@@ -2,34 +2,10 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
 var Shops = require("../models/shops");
-var multer = require("multer");
-var storage = multer.diskStorage({
-  filename: function(req, file, callback) {
-    callback(null, Date.now() + file.originalname);
-  }
-});
-var imageFilter = function(req, file, cb) {
-  // accept image files only
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-    return cb(new Error("Only image files are allowed!"), false);
-  }
-  cb(null, true);
-};
-var upload = multer({
-  storage: storage,
-  fileFilter: imageFilter
-});
-
-var cloudinary = require("cloudinary");
-cloudinary.config({
-  cloud_name: 'crednitt', 
-  api_key: process.env.CloudinaryAPIKEY, 
-  api_secret: process.env.Cloudinarysecret
-});
 
 
 router.get("/", function(req, res){
-  var shops = [
+  /*var shops = [
          {name: "2K Market", id: "abc"},
          {name: "Dimora", id: "def"},
          {name: "SC Juice", id: "ghi"},
@@ -39,6 +15,16 @@ router.get("/", function(req, res){
          {name: "bru", id: "stu"},
          {name: "lassi shop", id: "vwx"}
   ]
-  res.render("shops",{shops:shops});
+  res.render("shops",{shops:shops}); */
+  Shops.find({}, function(err, AllShop){
+    if(err){
+      req.flash("error", "something went wrong");
+      res.redirect("/");
+    }
+    else
+      { 
+        console.log(AllShop);
+        res.render("shops", {shop: AllShop, page:'shops', currentUser:req.user});}
+  });
 });
 module.exports=router;

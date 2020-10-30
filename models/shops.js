@@ -1,9 +1,7 @@
 var mongoose = require("mongoose");
 var shopsSchema = new mongoose.Schema({
 	name: String,
-	ID: String,
-	Points: Number,
-    Credits: Number,
-    Due: Number
+	id: String,
+    Dues: Number
 });
 module.exports = mongoose.model("Shops", shopsSchema);

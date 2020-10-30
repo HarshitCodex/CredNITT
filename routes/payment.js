@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require("../models/user");
 var Shops = require("../models/shops");
 //individual payment routes-----------------------------------------
-router.get("/payment/:id", (req, res) => {
+router.get("/:id", (req, res) => {
 	//use this when the backend is ready
 	/* Shop.findById(req.params.id, function (err, foundShop) {
 		if (err) {
