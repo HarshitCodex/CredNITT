@@ -39,7 +39,7 @@ app.use(function(req,res,next){
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
-
+mongoose.set('useCreateIndex', true);
 
 app.use("/",indexRoutes);
 app.use("/shops",shopsRoutes);

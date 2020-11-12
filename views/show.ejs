@@ -1,7 +1,7 @@
 <%-include("partials/header")%>
 <div class="container mt-4">    
-  <div class="row">
-    <div class="col-12 col-md-6 col-lg-3">
+  <div class="row justify-content-center">
+    <div class="col col-md-4 col-lg-3">
       <div id="profilePicture" class="card shadow-sm d-none d-md-block">
         <% if(user.image.length < 1) { %>
         <img class="card-img-top" src="https://basinred.com/wp-content/uploads/2016/09/default-user-img.jpg">
@@ -13,12 +13,67 @@
           
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <i class="fas fa-envelope"></i> <strong>Webmail: </strong><%= user.email %>             
-            </li>                                   
+              <i class="fa fa-envelope-o" aria-hidden="true"></i>  <strong>Webmail: </strong><%= user.email %>             
+            </li> 
+            <li class="list-group-item">
+              <i class="fa fa-inr" aria-hidden="true"></i>  <strong>Account Balance: </strong><%= user.Balance %>             
+            </li>                                    
           </ul>
         </div>
       </div>
     </div>
+    
+
+      
+      <div class="col justify-content-md-center">
+        <h3>Transaction History</h3>
+        
+        <table style="width:100%" class="card">
+
+          <tr>
+            <th>Shop Name</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+          <%user.Completetransaction.forEach(function(tns){%>
+          <tr>
+            <td><%= tns.shopName%></td>
+            <td><i class="fa fa-inr" aria-hidden="true"></i> <%= tns.amount%></td>
+            <td><%= tns.transactionDate%></td>
+          </tr>
+          <%});%>
+        </table>
+        
+      </div>
+      
+
+
+      
+      
+      <div class="col justify-content-md-center">
+
+        <h3>Due History</h3>
+        
+        <table style="width:100%" class="card">
+
+          <tr>
+            <th>Shop Name</th>
+            <th>Due Amount</th>
+            <th>Date</th>
+          </tr>
+          <%user.Dues.forEach(function(tns){%>
+          <tr>
+            <td><%= tns.shopName%></td>
+            <td><i class="fa fa-inr" aria-hidden="true"></i> <%= tns.amount%></td>
+            <td><%= tns.transactionDate%></td>
+          </tr>
+          <%});%>
+        </table>
+        
+      </div>
+      
+    
+    
   </div>
 </div>
 

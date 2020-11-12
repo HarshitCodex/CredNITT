@@ -24,7 +24,7 @@ router.get("/payment/:id", (req, res) => {
 router.post("/payment/:id", (req, res) => {
 
 	//temporary rendering
-	console.log(req.body)
+	//console.log(req.body)
 	let shop = { name: req.body.name, id: req.params.id, amount: req.body.amount };
 
 	if(req.user.Balance >= shop.amount){
@@ -32,7 +32,7 @@ router.post("/payment/:id", (req, res) => {
 		req.user.Completetransaction.push({shopName:req.body.shopName, amount:shop.amount})
 		
 		req.user.save().then(user=>{
-			console.log(req.user)
+			//console.log(req.user)
 		
 			Shops.findOne({id:req.params.id}, function (err, foundShop) {
 				if (err) {
@@ -83,7 +83,7 @@ router.get("/due/:id", (req, res) => {
 router.post("/due/:id", (req, res) => {
 
 	//temporary rendering
-	console.log(req.body)
+	//console.log(req.body)
 	let shop = { name: req.body.name, id: req.params.id, amount: req.body.amount };
 
 	req.user.Dues.push({shopName:req.body.shopName, amount:shop.amount})

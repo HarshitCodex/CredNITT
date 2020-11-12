@@ -83,7 +83,7 @@ router.get("/", function(req, res){
     }
     else
       { 
-        console.log(AllShop);
+        //console.log(AllShop);
         res.render("shops", {shop: AllShop, page:'shops', currentUser:req.user});}
   });
 });

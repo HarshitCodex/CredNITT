@@ -143,7 +143,10 @@ router.get("/users/:id", function(req,res){
       res.redirect("/");
     }
     else
-      {res.render("show", {user: foundUser});}
+      {
+        res.render("show", {user: foundUser});
+        //console.log(foundUser.Completetransaction);
+      }
   });
 });
 module.exports = router;
