@@ -23,7 +23,7 @@ router.post("/", function (req, res) {
                 console.log(err);
             }
             else {
-                console.log("hiii");
+                //console.log("hiii");
                 foundShop.forEach(function (shopp) {
                     shopp.AccountBalance = 0;
                     shopp.save();
@@ -32,7 +32,7 @@ router.post("/", function (req, res) {
         });
     }
     else {
-        console.log('bye');
+        //console.log('bye');
         User.find({}, function (err, Users) {
             if (err) {
                 console.log(err);
@@ -49,7 +49,7 @@ router.post("/", function (req, res) {
                     
                     userr.Balance += 5000 - dues_sum;
 
-                    console.log(userr.firstName);
+                    //console.log(userr.firstName);
                     userr.save();
                 });
             }

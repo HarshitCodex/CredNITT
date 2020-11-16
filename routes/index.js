@@ -56,7 +56,7 @@ router.post("/register", upload.single("image"), function (req, res) {
       image: "",
       imageId: ""
     });
-    console.log(req.body.admincode);
+    //console.log(req.body.admincode);
     if (req.body.admincode === 'secretcode123') {
 
       newUser.isAdmin = true;
