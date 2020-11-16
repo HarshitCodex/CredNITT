@@ -76,7 +76,7 @@ var shop9 = new Shops({ name: 'MM1 Laundry', id: 'I', Dues: 0, imageURL: 'data:i
 shop9.save(function (err, shop) {
   if (err) return console.error(err);
   console.log(shop.name + " saved to shopstore collection.");
-});*/ 
+});
 
 */
 router.get("/", isLoggedIn, function (req, res) {
