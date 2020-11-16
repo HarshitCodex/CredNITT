@@ -15,6 +15,8 @@ var paymentRoutes = require("./routes/payment");
 mongoose.connect("mongodb://localhost/CredNitt",{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false });
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const { check, validationResult } = require('express-validator');
 app.use(express.static(__dirname + "/public"));
 app.use(flash());
 app.use(require("express-session")({

@@ -65,7 +65,8 @@ router.post("/register",upload.single("image"), function(req, res){
     User.register(newUser, req.body.password, function(err, user){
       if(err){
         console.log(err);
-        return res.render("register", {error: err.message});
+        return res.render("register");
+        req.flash("error", "Email already exists or give a valid email")
       }
       passport.authenticate("local")(req, res, function(){
        req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);

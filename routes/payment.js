@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require("../models/user");
 var Shops = require("../models/shops");
 //individual payment routes-----------------------------------------
-router.get("/payment/:id", (req, res) => {
+router.get("/payment/:id",isLoggedIn, (req, res) => {
 	//use this when the backend is ready
 	// console.log(req.params.id)
 	Shops.findOne({id:req.params.id}, function (err, foundShop) {
@@ -62,7 +62,7 @@ router.post("/payment/:id", (req, res) => {
 
 
 
-router.get("/due/:id", (req, res) => {
+router.get("/due/:id",isLoggedIn, (req, res) => {
 	//use this when the backend is ready
 	// console.log(req.params.id)
 	Shops.findOne({id:req.params.id}, function (err, foundShop) {
@@ -111,5 +111,11 @@ router.post("/due/:id", (req, res) => {
 
 });
 
-
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    req.flash("error", "Please Login First!")
+    res.redirect("/login");
+}
 module.exports=router;

@@ -36,6 +36,54 @@ body {
   margin:0;
   background-color: #3399ff;
 }
+#newuser{
+  padding: 0px 10px;
+  word-wrap: normal;
+  display: inline-block;
+}
+#box{
+  width: 1500px;
+  padding: 40px;
+  position: relative;
+  top: 50%;
+  left: 22%;
+  bottom: 10%;
+  transform: translate(-50%,-50%);
+  background: #191919;
+  text-align: center;
+}
+#box h1{
+  color:white;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: 'Lato' , sans-serif;
+
+}
+#box input[type = "text"],#box input[type = "password"],#box input[type="email"]{
+  border:0;
+  background:none;
+  display:block;
+  position: relative;
+  margin:15px,15px auto;
+  text-align: center;
+  border:2px solid #3498db;
+  padding: 14px 14px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+
+}
+#box input[type = "text"]:focus,#box input[type = "password"]:focus,#box input[type="email"]:focus{
+width: 280px;
+border-color:#2ecc71;
+}
+.goback{
+  position: relative;
+  margin-top: 30px;
+  margin-left: 220px;
+}
 .footer {
   /*position: absolute; */
   bottom: 0;
