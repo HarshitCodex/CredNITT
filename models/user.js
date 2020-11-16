@@ -18,7 +18,7 @@ var UserSchema = new mongoose.Schema({
 	image: String,
 	imageId: String,
 	email: { type: String, require: true, index: true, unique: true, sparse: true },
-	Balance: { type: Number, default: 5000 },
+	Balance: { type: Number, default: 500 },
 	Dues: {
 		type: [transaction],
 		default: null

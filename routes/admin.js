@@ -44,11 +44,13 @@ router.post("/", function (req, res) {
                     let dues_sum = 0;
                     userr.Dues.forEach(function (due) {
                         dues_sum += due.amount;
+                        userr.Completetransaction.push({ transactionDate: due.transactionDate, shopName: due.shopName, amount: due.amount });
+                        userr.Dues.pull({ _id: due._id });
                     });
-                    
-                    
-                    userr.Balance += 5000 - dues_sum;
 
+
+
+                    userr.Balance += 500 - dues_sum;
                     console.log(userr.firstName);
                     userr.save();
                 });

@@ -39,7 +39,7 @@ router.post("/payment/:id", (req, res) => {
 					console.log(err);
 				}
 				else {
-					foundShop.AccountBalance += shop.amount;
+					foundShop.AccountBalance += parseInt(shop.amount);
 					foundShop.save().then(foundShop => {
 						req.flash("success", "Payment successfull");
 						res.redirect("/users/" + req.user.id);
@@ -96,7 +96,7 @@ router.post("/due/:id", (req, res) => {
 			}
 			else {
 				console.log(shop.amount);
-				foundShop.AccountBalance += shop.amount;
+				foundShop.AccountBalance += parseInt(shop.amount);
 				console.log(foundShop.AccountBalance);
 				foundShop.save().then(foundShop => {
 					req.flash("success", "Due Payment successfull");
