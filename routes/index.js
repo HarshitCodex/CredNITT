@@ -5,11 +5,11 @@ var User = require("../models/user");
 var Shops = require("../models/shops");
 var multer = require("multer");
 var storage = multer.diskStorage({
-  filename: function(req, file, callback) {
+  filename: function (req, file, callback) {
     callback(null, Date.now() + file.originalname);
   }
 });
-var imageFilter = function(req, file, cb) {
+var imageFilter = function (req, file, cb) {
   // accept image files only
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
     return cb(new Error("Only image files are allowed!"), false);
@@ -23,64 +23,65 @@ var upload = multer({
 
 var cloudinary = require("cloudinary");
 cloudinary.config({
-  cloud_name: 'crednitt', 
-  api_key:'698692367846536', 
+  cloud_name: 'crednitt',
+  api_key: '698692367846536',
   api_secret: 'NN7xe67y2pg0HgyhPU3YQIdldog'
 });
 
 
 
-router.get("/", function(req,res){
-  if(req.user)
-  {
+router.get("/", function (req, res) {
+  if (req.user) {
     return res.redirect("/shops");
-  }else{
-   res.render("landing");
- }
+  } else {
+    res.render("landing");
+  }
 });
 //Authentication routes----------------------------
-router.get("/register", function(req,res){
-  if(req.user){
+router.get("/register", function (req, res) {
+  if (req.user) {
     return res.redirect("/shops");
-  }else{
-  res.render("register");
-}
+  } else {
+    res.render("register");
+  }
 });
 
-router.post("/register",upload.single("image"), function(req, res){
-  if(req.file === undefined){
+router.post("/register", upload.single("image"), function (req, res) {
+  if (req.file === undefined) {
     var newUser = new User({
       username: req.body.username,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      image:"",
-      imageId:""
+      image: "",
+      imageId: ""
     });
+    console.log(req.body.admincode);
+    if (req.body.admincode === 'secretcode123') {
 
-    if(req.body.adminCode === 'secretcode123') {
       newUser.isAdmin = true;
     }
 
-    User.register(newUser, req.body.password, function(err, user){
-      if(err){
+    User.register(newUser, req.body.password, function (err, user) {
+      if (err) {
         console.log(err);
-        return res.render("register", {error: err.message});
+        return res.render("register");
+        req.flash("error", "Fill every field");
       }
-      passport.authenticate("local")(req, res, function(){
-       req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);
-       res.redirect("/shops"); 
-     });
+      passport.authenticate("local")(req, res, function () {
+        req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);
+        res.redirect("/shops");
+      });
     });
   } else {
     cloudinary.v2.uploader.upload(
       req.file.path, {
-        width: 400,
-        height: 400,
-        gravity: "center",
-        crop: "scale"
-      },
-      function(err, result) {
+      width: 400,
+      height: 400,
+      gravity: "center",
+      crop: "scale"
+    },
+      function (err, result) {
         if (err) {
           req.flash("error", err.messsage);
           return res.redirect("/");
@@ -90,60 +91,61 @@ router.post("/register",upload.single("image"), function(req, res){
         var newUser = new User({
           username: req.body.username,
           email: req.body.email,
-          firstName:req.body.firstName,
-          lastName:req.body.lastName,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
           image: req.body.image,
           imageId: req.body.imageId
         });
-        User.register(newUser, req.body.password, function(err, user) {
+        User.register(newUser, req.body.password, function (err, user) {
           if (err) {
-            return res.render("register", {
-              error: err.message
-            });
+            return res.render("register");
+            req.flash("error", err.message);
           }
-          passport.authenticate("local")(req, res, function() {
+          passport.authenticate("local")(req, res, function () {
             res.redirect("/shops");
           });
         });
       }, {
-        moderation: "webpurify"
-      }
-      );
+      moderation: "webpurify"
+    }
+    );
 
   }
 });
 
 //show login form----------------------------------
-router.get("/login", function(req,res){
-  if(req.user){
+router.get("/login", function (req, res) {
+  if (req.user) {
     return res.redirect("/shops")
-  }else{
-	res.render("login");
-}
+  } else {
+    res.render("login");
+  }
 });
 //handling login logic
 router.post("/login", passport.authenticate("local",
-{
-  successRedirect:"/shops",
-  failureRedirect:"/login"
-}),function(req,res){
+  {
+    successRedirect: "/shops",
+    failureRedirect: "/login"
+  }), function (req, res) {
 
-});
+  });
 //logout route
-router.get("/logout", function(req,res){
-	req.logout();
+router.get("/logout", function (req, res) {
+  req.logout();
   req.flash("success", "Logged out successfully!");
   res.redirect("/");
 });
 //USER Profile
-router.get("/users/:id", function(req,res){
-  User.findById(req.params.id, function(err, foundUser){
-    if(err){
+router.get("/users/:id", function (req, res) {
+  User.findById(req.params.id, function (err, foundUser) {
+    if (err) {
       req.flash("error", "something went wrong");
       res.redirect("/");
     }
-    else
-      {res.render("show", {user: foundUser});}
+    else {
+      res.render("show", { user: foundUser });
+      //console.log(foundUser.Completetransaction);
+    }
   });
 });
 module.exports = router;

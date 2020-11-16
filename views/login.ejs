@@ -1,21 +1,24 @@
 <%-include("partials/header")%>
 <div class="row justify-content-center">
-<div class="col-sm-8 col-md-offset-2">
-<form class="form-signin" action="/login" method="POST">
-<h1 class="h3 mb-4 font-weight-heavy ">Please Login In</h1>
-<label for="inputUsername" class="sr-only">Username</label>
+	<div class="col-sm-8 col-md-offset-2">
+		<form class="form-signin" id="box" action="/login" method="POST">
+			<h1 class="h3 mb-4 font-weight-heavy ">Please Login In</h1>
+			<label for="inputUsername" class="sr-only">Username</label>
 
-<input type="text" id="inputUsername" class="form-control" name="username" placeholder="username" required autofocus>
-<label for="inputPassword" class="sr-only">Password</label>
-<input type="password" id="inputPassword" class="form-control" name="password" placeholder="password" required>
+			<input type="text" id="inputUsername" class="form-control" name="username" placeholder="Username" required autofocus>
+			<label for="inputPassword" class="sr-only">Password</label>
+			<input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
 
-<button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
-</form>
-<div class="form-signin">
-    <a style = "color: white;"href="/">Go Back</a>
-</div>
+			<button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
+		</form>
+		<div class="goback">
+			<a style = "color: black;"href="/">Go Back</a>
 
-</div>
+
+			
+			<a id="newuser" style = "color: black;"href="/register">New Registration</a>
+		</div>
+	</div>
 
 	
 </div>
