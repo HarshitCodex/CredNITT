@@ -34,7 +34,7 @@ app.use(function(req,res,next){
 	res.locals.currentUser = req.user;
 	res.locals.error = req.flash("error");
 	res.locals.success = req.flash("success");
-    next();
+	next();
 
 });
 
@@ -47,5 +47,5 @@ app.use("/",indexRoutes);
 app.use("/shops",shopsRoutes);
 app.use("/",paymentRoutes);
 app.listen(process.env.PORT ||3000, function() { 
-  console.log('Server listening on port 3000'); 
+	console.log('Server listening on port 3000'); 
 });

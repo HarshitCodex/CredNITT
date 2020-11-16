@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var User = require("../models/user");
 var Shops = require("../models/shops");
 var db = mongoose.connection;
- 
+
 
  /*var shop1 = new Shops({ name: '2K Market', id: 'A', Dues: 0 });
  
@@ -74,25 +74,25 @@ var db = mongoose.connection;
        if (err) return console.error(err);
        console.log(shop.name + " saved to shopstore collection.");
      });
-   */ 
+     */ 
 
-router.get("/",isLoggedIn, function(req, res){
-  Shops.find({}, function(err, AllShop){
-    if(err){
-      req.flash("error", "something went wrong");
-      res.redirect("/");
-    }
-    else
-      { 
-        
-        res.render("shops", {shop: AllShop, page:'shops', currentUser:req.user});}
-  });
-});
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
+     router.get("/",isLoggedIn, function(req, res){
+      Shops.find({}, function(err, AllShop){
+        if(err){
+          req.flash("error", "something went wrong");
+          res.redirect("/");
+        }
+        else
+        { 
+          
+          res.render("shops", {shop: AllShop, page:'shops', currentUser:req.user});}
+        });
+    });
+     function isLoggedIn(req, res, next){
+      if(req.isAuthenticated()){
         return next();
+      }
+      req.flash("error", "Please Login First!")
+      res.redirect("/login");
     }
-    req.flash("error", "Please Login First!")
-    res.redirect("/login");
-}
-module.exports=router;
+    module.exports=router;

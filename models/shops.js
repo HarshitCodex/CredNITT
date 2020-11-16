@@ -5,4 +5,5 @@ var shopsSchema = new mongoose.Schema({
 	Dues: Number,
 	AccountBalance:{type:Number, default:0}
 });
+
 module.exports = mongoose.model("Shops", shopsSchema);

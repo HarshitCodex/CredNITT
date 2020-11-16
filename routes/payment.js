@@ -33,7 +33,7 @@ router.post("/payment/:id", (req, res) => {
 		
 		req.user.save().then(user=>{
 			//console.log(req.user)
-		
+			
 			Shops.findOne({id:req.params.id}, function (err, foundShop) {
 				if (err) {
 					console.log(err);
@@ -41,9 +41,9 @@ router.post("/payment/:id", (req, res) => {
 				else {
 					foundShop.AccountBalance += shop.amount;
 					foundShop.save().then(foundShop=>{
-							req.flash("success", "Payment successfull");
-							res.redirect("/users/"+req.user.id); 
-						}
+						req.flash("success", "Payment successfull");
+						res.redirect("/users/"+req.user.id); 
+					}
 					);
 				}
 			}); 
@@ -97,9 +97,9 @@ router.post("/due/:id", (req, res) => {
 			else {
 				foundShop.Dues += shop.amount;
 				foundShop.save().then(foundShop=>{
-						req.flash("success", "Due Payment successfull");
-						res.redirect("/"); 												
-					}
+					req.flash("success", "Due Payment successfull");
+					res.redirect("/"); 												
+				}
 				).catch(err=>{});
 			}
 		}); 
@@ -112,10 +112,10 @@ router.post("/due/:id", (req, res) => {
 });
 
 function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    req.flash("error", "Please Login First!")
-    res.redirect("/login");
+	if(req.isAuthenticated()){
+		return next();
+	}
+	req.flash("error", "Please Login First!")
+	res.redirect("/login");
 }
 module.exports=router;

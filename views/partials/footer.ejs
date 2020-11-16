@@ -1,66 +1,66 @@
 <div class="mt-3">
 
-        <footer class="footer">
-          <div class="container text-center">
-            <small class="text-muted">&copy; TradeMark CredNITT 2020 | <a style ="color:black;" href="/">Home</a> | </small>
-          </div>
-        </footer>
-        </div>
+<footer class="footer">
+<div class="container text-center">
+<small class="text-muted">&copy; TradeMark CredNITT 2020 | <a style ="color:black;" href="/">Home</a> | </small>
+</div>
+</footer>
+</div>
 
-    </div>
-  </footer>
+</div>
+</footer>
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-  integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-  integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 <script type="text/javascript">
-  const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
+const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
 
 const numBalls = 50;
 const balls = [];
 
 for (let i = 0; i < numBalls; i++) {
-  let ball = document.createElement("div");
-  ball.classList.add("ball");
-  ball.style.background = colors[Math.floor(Math.random() * colors.length)];
-  ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
-  ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
-  ball.style.transform = `scale(${Math.random()})`;
-  ball.style.width = `${Math.random()}em`;
-  ball.style.height = ball.style.width;
-  
-  balls.push(ball);
-  document.body.append(ball);
+let ball = document.createElement("div");
+ball.classList.add("ball");
+ball.style.background = colors[Math.floor(Math.random() * colors.length)];
+ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
+ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
+ball.style.transform = `scale(${Math.random()})`;
+ball.style.width = `${Math.random()}em`;
+ball.style.height = ball.style.width;
+
+balls.push(ball);
+document.body.append(ball);
 }
 
 // Keyframes
 balls.forEach((el, i, ra) => {
-  let to = {
-    x: Math.random() * (i % 2 === 0 ? -11 : 11),
-    y: Math.random() * 12
-  };
+let to = {
+x: Math.random() * (i % 2 === 0 ? -11 : 11),
+y: Math.random() * 12
+};
 
-  let anim = el.animate(
-    [
-      { transform: "translate(0, 0)" },
-      { transform: `translate(${to.x}rem, ${to.y}rem)` }
-    ],
-    {
-      duration: (Math.random() + 1) * 2000, // random duration
-      direction: "alternate",
-      fill: "both",
-      iterations: Infinity,
-      easing: "ease-in-out"
-    }
-  );
+let anim = el.animate(
+[
+{ transform: "translate(0, 0)" },
+{ transform: `translate(${to.x}rem, ${to.y}rem)` }
+],
+{
+duration: (Math.random() + 1) * 2000, // random duration
+direction: "alternate",
+fill: "both",
+iterations: Infinity,
+easing: "ease-in-out"
+}
+);
 });
 </script>
 
-  
+
 </body>
 
 </html>

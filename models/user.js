@@ -9,7 +9,6 @@ const transaction = new  mongoose.Schema({
 		default:Date.now()
 	}});
 
-
 var UserSchema = new mongoose.Schema({
 	username: {type:String, unique:true, required:true},
 	password: String,
