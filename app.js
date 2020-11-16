@@ -12,7 +12,9 @@ var User = require("./models/user");
 var shopsRoutes = require("./routes/shops");
 var indexRoutes = require("./routes/index");
 var paymentRoutes = require("./routes/payment");
-mongoose.connect("mongodb://localhost/CredNitt",{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false });
+var adminRoutes = require("./routes/admin");
+
+mongoose.connect("mongodb://localhost/CredNitt", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -30,7 +32,7 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-app.use(function(req,res,next){
+app.use(function (req, res, next) {
 	res.locals.currentUser = req.user;
 	res.locals.error = req.flash("error");
 	res.locals.success = req.flash("success");
@@ -43,9 +45,13 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useCreateIndex', true);
 
-app.use("/",indexRoutes);
-app.use("/shops",shopsRoutes);
-app.use("/",paymentRoutes);
-app.listen(process.env.PORT ||3000, function() { 
-	console.log('Server listening on port 3000'); 
+app.use("/admin", adminRoutes);
+app.use("/", indexRoutes);
+app.use("/shops", shopsRoutes);
+app.use("/", paymentRoutes);
+
+
+
+app.listen(process.env.PORT || 3000, function () {
+	console.log('Server listening on port 3000');
 });

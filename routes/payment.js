@@ -3,17 +3,17 @@ var router = express.Router();
 var User = require("../models/user");
 var Shops = require("../models/shops");
 //individual payment routes-----------------------------------------
-router.get("/payment/:id",isLoggedIn, (req, res) => {
+router.get("/payment/:id", isLoggedIn, (req, res) => {
 	//use this when the backend is ready
 	// console.log(req.params.id)
-	Shops.findOne({id:req.params.id}, function (err, foundShop) {
+	Shops.findOne({ id: req.params.id }, function (err, foundShop) {
 		if (err) {
 			console.log(err);
 		}
 		else {
 			res.render("payments", { shop: foundShop });
 		}
-	}); 
+	});
 
 	//temporary rendering
 	// let shop = { name: "2K Market", id: "abc", amount: 100 };
@@ -27,52 +27,52 @@ router.post("/payment/:id", (req, res) => {
 	//console.log(req.body)
 	let shop = { name: req.body.name, id: req.params.id, amount: req.body.amount };
 
-	if(req.user.Balance >= shop.amount){
+	if (req.user.Balance >= shop.amount) {
 		req.user.Balance -= shop.amount;
-		req.user.Completetransaction.push({shopName:req.body.shopName, amount:shop.amount})
-		
-		req.user.save().then(user=>{
+		req.user.Completetransaction.push({ shopName: req.body.shopName, amount: shop.amount })
+
+		req.user.save().then(user => {
 			//console.log(req.user)
-			
-			Shops.findOne({id:req.params.id}, function (err, foundShop) {
+
+			Shops.findOne({ id: req.params.id }, function (err, foundShop) {
 				if (err) {
 					console.log(err);
 				}
 				else {
 					foundShop.AccountBalance += shop.amount;
-					foundShop.save().then(foundShop=>{
+					foundShop.save().then(foundShop => {
 						req.flash("success", "Payment successfull");
-						res.redirect("/users/"+req.user.id); 
+						res.redirect("/users/" + req.user.id);
 					}
 					);
 				}
-			}); 
+			});
 
-		}).catch(err=>{
+		}).catch(err => {
 			req.flash("error", "Something went wrong");
-			res.redirect("/"); 
+			res.redirect("/");
 		})
 
-	}	else{
-		req.flash("error", "You don't have enough balance" );
-		res.redirect("/due/" + req.params.id); 
+	} else {
+		req.flash("error", "You don't have enough balance");
+		res.redirect("/due/" + req.params.id);
 	}
 });
 
 
 
 
-router.get("/due/:id",isLoggedIn, (req, res) => {
+router.get("/due/:id", isLoggedIn, (req, res) => {
 	//use this when the backend is ready
 	// console.log(req.params.id)
-	Shops.findOne({id:req.params.id}, function (err, foundShop) {
+	Shops.findOne({ id: req.params.id }, function (err, foundShop) {
 		if (err) {
 			console.log(err);
 		}
 		else {
 			res.render("due", { shop: foundShop });
 		}
-	}); 
+	});
 
 	//temporary rendering
 	// let shop = { name: "2K Market", id: "abc", amount: 100 };
@@ -86,36 +86,38 @@ router.post("/due/:id", (req, res) => {
 	//console.log(req.body)
 	let shop = { name: req.body.name, id: req.params.id, amount: req.body.amount };
 
-	req.user.Dues.push({shopName:req.body.shopName, amount:shop.amount})
-	
-	req.user.save().then(user=>{
-		
-		Shops.findOne({id:req.params.id}, function (err, foundShop) {
+	req.user.Dues.push({ shopName: req.body.shopName, amount: shop.amount })
+
+	req.user.save().then(user => {
+
+		Shops.findOne({ id: req.params.id }, function (err, foundShop) {
 			if (err) {
 				console.log(err);
 			}
 			else {
-				foundShop.Dues += shop.amount;
-				foundShop.save().then(foundShop=>{
+				console.log(shop.amount);
+				foundShop.AccountBalance += shop.amount;
+				console.log(foundShop.AccountBalance);
+				foundShop.save().then(foundShop => {
 					req.flash("success", "Due Payment successfull");
-					res.redirect("/"); 												
+					res.redirect("/");
 				}
-				).catch(err=>{});
+				).catch(err => { });
 			}
-		}); 
+		});
 
-	}).catch(err=>{
+	}).catch(err => {
 		req.flash("error", "Something went wrong");
-		res.redirect("/"); 
+		res.redirect("/");
 	})
 
 });
 
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated()) {
 		return next();
 	}
 	req.flash("error", "Please Login First!")
 	res.redirect("/login");
 }
-module.exports=router;
+module.exports = router;
