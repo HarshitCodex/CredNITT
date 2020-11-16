@@ -3,11 +3,13 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = require("../models/user");
 var Shops = require("../models/shops");
-var db = mongoose.connection;
+//var db = mongoose.connection;
 
 /*
 
+
 var shop1 = new Shops({ name: '2K Market', id: 'A', Dues: 0, imageURL: 'https://images.newindianexpress.com/uploads/user/imagelibrary/2020/4/30/w1200X800/Lockdown_marginallyz.jpg' });
+
 
 
 shop1.save(function (err, shop) {
@@ -74,7 +76,7 @@ var shop9 = new Shops({ name: 'MM1 Laundry', id: 'I', Dues: 0, imageURL: 'data:i
 shop9.save(function (err, shop) {
   if (err) return console.error(err);
   console.log(shop.name + " saved to shopstore collection.");
-});
+});*/ 
 
 */
 router.get("/", isLoggedIn, function (req, res) {
