@@ -5,9 +5,9 @@ var User = require("../models/user");
 var Shops = require("../models/shops");
 //var db = mongoose.connection;
 
+
+
 /*
-
-
 var shop1 = new Shops({ name: '2K Market', id: 'A', Dues: 0, imageURL: 'https://images.newindianexpress.com/uploads/user/imagelibrary/2020/4/30/w1200X800/Lockdown_marginallyz.jpg' });
 
 
