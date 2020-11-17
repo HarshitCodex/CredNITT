@@ -42,20 +42,27 @@ router.post("/", function (req, res) {
                 Users.forEach(function (userr) {
 
                     let dues_sum = 0;
+
                     userr.Dues.forEach(function (due) {
                         dues_sum += due.amount;
+                        console.log(due.shopName, due.amount);
                         userr.Completetransaction.push({ transactionDate: due.transactionDate, shopName: due.shopName, amount: due.amount });
-                        userr.Dues.pull({ _id: due._id });
+
+                    });
+
+                    User.update({}, { $set: { Dues: [] } }, function (err, affected) {
+                        console.log(affected);
                     });
 
 
 
                     userr.Balance += 500 - dues_sum;
-                    console.log(userr.firstName);
+
 
                     //console.log(userr.firstName);
 
                     userr.save();
+
                 });
             }
         });
