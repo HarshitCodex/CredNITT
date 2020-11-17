@@ -5,8 +5,7 @@ const transaction = new mongoose.Schema({
 	shopName: String,
 	amount: { type: Number },
 	transactionDate: {
-		type: Date,
-		default: Date.now()
+		type: String
 	}
 });
 

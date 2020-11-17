@@ -11,26 +11,26 @@
 <form action="/due/<%=shop.id%>" method="POST">
 <h1 class="h1 mb-4 font-weight-heavy "><%=shop.name%></h1>
 <div class="form-group">
-<label for="amount">Due Amount:</label>
-<input class="form-control" type="number" name="amount" id="amount" placeholder="Amount" required>
+    <label for="amount">Due Amount:</label>
+    <input class="form-control" type="number" name="amount" id="amount" placeholder="Amount" required>
 </div>
 
 <div class="form-group">
-<label for="cmnt">Comment:</label>
-<input class="form-control" type="text" name="comment" id="cmnt" placeholder="Comment"
-value="Paying to <%=shop.name%>">
+    <label for="cmnt">Comment:</label>
+    <input class="form-control" type="text" name="comment" id="cmnt" placeholder="Comment"
+        value="Paying to <%=shop.name%>">
 </div>
 <div class="form-group">
-<label for="timestamp">Date Time:</label>
-<input class="form-control" type="text" name="datetime" id="timestamp" placeholder="" value="<%=getDT()%>" disabled>
+    <label for="timestamp">Date Time:</label>
+    <input class="form-control" type="text" name="datetime" id="timestamp" placeholder="" value="<%=getDT()%>" disabled>
 </div>
 
-<input type = "hidden" name= "shopName" value = "<%=shop.name%>"/>
+<input type="hidden" name="shopName" value="<%=shop.name%>" />
 <button class="btn btn-lg btn-primary btn-block" type="submit"><strong>Confirm Payment </strong><svg width="2em"
-height="2em" viewBox="0 0 16 16" class="bi bi-wallet2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd"
-d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z" />
-</svg></button>
+        height="2em" viewBox="0 0 16 16" class="bi bi-wallet2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+            d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z" />
+    </svg></button>
 </form>
 </div>
 </div>
