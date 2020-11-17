@@ -25,11 +25,11 @@ router.post("/payment/:id", (req, res) => {
 
 	//temporary rendering
 	//console.log(req.body)
-	let shop = { name: req.body.name, id: req.params.id, amount: req.body.amount };
-
+	let shop = { name: req.body.name, id: req.params.id, amount: req.body.amount, date: req.body.datetime };
+	console.log(shop.date);
 	if (req.user.Balance >= shop.amount) {
 		req.user.Balance -= shop.amount;
-		req.user.Completetransaction.push({ shopName: req.body.shopName, amount: shop.amount })
+		req.user.Completetransaction.push({ shopName: req.body.shopName, amount: shop.amount, transactionDate: shop.date });
 
 		req.user.save().then(user => {
 			//console.log(req.user)
@@ -84,9 +84,9 @@ router.post("/due/:id", (req, res) => {
 
 	//temporary rendering
 	//console.log(req.body)
-	let shop = { name: req.body.name, id: req.params.id, amount: req.body.amount };
+	let shop = { name: req.body.name, id: req.params.id, amount: req.body.amount, date: req.body.datetime };
 
-	req.user.Dues.push({ shopName: req.body.shopName, amount: shop.amount })
+	req.user.Dues.push({ shopName: req.body.shopName, amount: shop.amount, transactionDate: shop.date })
 
 	req.user.save().then(user => {
 
