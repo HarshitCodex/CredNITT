@@ -26,7 +26,8 @@ router.post("/payment/:id", (req, res) => {
 	//temporary rendering
 	//console.log(req.body)
 	let shop = { name: req.body.name, id: req.params.id, amount: req.body.amount, date: req.body.datetime };
-	console.log(shop.date);
+	
+	
 	if (req.user.Balance >= shop.amount) {
 		req.user.Balance -= shop.amount;
 		req.user.Completetransaction.push({ shopName: req.body.shopName, amount: shop.amount, transactionDate: shop.date });
@@ -86,30 +87,39 @@ router.post("/due/:id", (req, res) => {
 	//console.log(req.body)
 	let shop = { name: req.body.name, id: req.params.id, amount: req.body.amount, date: req.body.datetime };
 
-	req.user.Dues.push({ shopName: req.body.shopName, amount: shop.amount, transactionDate: shop.date })
 
-	req.user.save().then(user => {
+	Shops.findOne({ id: req.params.id }, function (err, foundShop) {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			
+			let dues_sum = 0;
+			req.user.Dues.forEach(function (due) {
+				dues_sum += due.amount;
+			});
+			
 
-		Shops.findOne({ id: req.params.id }, function (err, foundShop) {
-			if (err) {
-				console.log(err);
-			}
-			else {
-				console.log(shop.amount);
+			if (parseInt(dues_sum) + parseInt(shop.amount) <= 500) {
 				foundShop.AccountBalance += parseInt(shop.amount);
-				console.log(foundShop.AccountBalance);
+			
+				req.user.Dues.push({ shopName: req.body.shopName, amount: shop.amount, transactionDate: shop.date });
+				req.user.save();
+				
+
 				foundShop.save().then(foundShop => {
 					req.flash("success", "Due Payment successfull");
-					res.redirect("/");
+					res.redirect("/users/" + req.user.id);
 				}
 				).catch(err => { });
 			}
-		});
+			else {
+				req.flash("error", "Total dues exceeded limit");
+				res.redirect("/shops");
+			}
+		}
+	});
 
-	}).catch(err => {
-		req.flash("error", "Something went wrong");
-		res.redirect("/");
-	})
 
 });
 
